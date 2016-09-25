@@ -1,18 +1,22 @@
-all: geomesa-accumulo-distributed-runtime-1.2.4.jar
-	docker build -t jamesmcclain/geomesa:0 .
+GEOMESA_VERSION := 1.2.6
 
-geomesa-dist-1.2.4-bin.tar.gz:
-	curl -C - -O 'https://repo.locationtech.org/content/repositories/geomesa-releases/org/locationtech/geomesa/geomesa-dist/1.2.4/geomesa-dist-1.2.4-bin.tar.gz'
+all: geomesa-accumulo-distributed-runtime-${GEOMESA_VERSION}.jar
+	docker build \
+		--build-arg GEOMESA_VERSION=${GEOMESA_VERSION} \
+		-t jamesmcclain/geomesa:${GEOMESA_VERSION} .
 
-geomesa-accumulo-distributed-runtime-1.2.4.jar: geomesa-dist-1.2.4-bin.tar.gz
-	tar axvf geomesa-dist-1.2.4-bin.tar.gz
-	cp geomesa-1.2.4/dist/accumulo/geomesa-accumulo-distributed-runtime-1.2.4.jar .
+geomesa-dist-${GEOMESA_VERSION}-bin.tar.gz:
+	curl -C - -O 'https://repo.locationtech.org/content/repositories/geomesa-releases/org/locationtech/geomesa/geomesa-dist/${GEOMESA_VERSION}/geomesa-dist-${GEOMESA_VERSION}-bin.tar.gz'
+
+geomesa-accumulo-distributed-runtime-${GEOMESA_VERSION}.jar: geomesa-dist-${GEOMESA_VERSION}-bin.tar.gz
+	tar axvf geomesa-dist-${GEOMESA_VERSION}-bin.tar.gz
+	cp geomesa-${GEOMESA_VERSION}/dist/accumulo/geomesa-accumulo-distributed-runtime-${GEOMESA_VERSION}.jar .
 
 clean:
-	rm -rf geomesa-1.2.4/
+	rm -rf geomesa-${GEOMESA_VERSION}/
 
 cleaner: clean
-	rm -f geomesa-accumulo-distributed-runtime-1.2.4.jar
+	rm -f geomesa-accumulo-distributed-runtime-${GEOMESA_VERSION}.jar
 
 cleanest: cleaner
-	rm -f geomesa-dist-1.2.4-bin.tar.gz
+	rm -f geomesa-dist-${GEOMESA_VERSION}-bin.tar.gz
