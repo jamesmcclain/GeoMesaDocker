@@ -1,4 +1,4 @@
-FROM jamesmcclain/accumulo:7
+FROM jamesmcclain/accumulo:8u111
 MAINTAINER James McClain <james.mcclain@gmail.com>
 
 ARG GEOMESA_VERSION

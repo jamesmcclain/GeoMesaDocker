@@ -1,4 +1,4 @@
-GEOMESA_VERSION := 1.2.7
+GEOMESA_VERSION := 1.2.7.3
 
 all: geomesa-accumulo-distributed-runtime-${GEOMESA_VERSION}.jar
 	docker build \
