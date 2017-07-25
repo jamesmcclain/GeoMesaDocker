@@ -4,7 +4,7 @@ please consider using [GeoDocker](https://github.com/geodocker/geodocker).
 
 # Build #
 
-The image `jamesmcclain/geomesa:1.3.1` can be built by typing:
+The image `jamesmcclain/geomesa:1.3.2` can be built by typing:
 ```bash
 make
 ```
@@ -14,19 +14,19 @@ make
 Start a GeoMesa-enabled Accumulo container by typing:
 ```bash
 docker network create --driver bridge geomesa
-docker run -it --rm -p 50095:50095 --net=geomesa --hostname leader --name leader jamesmcclain/geomesa:1.3.1
+docker run -it --rm -p 50095:50095 --net=geomesa --hostname leader --name leader jamesmcclain/geomesa:1.3.2
 ```
 
 Optional additional followers can be started by typing:
 ```bash
-docker run -it --rm --net=geomesa --entrypoint /scripts/follower.sh jamesmcclain/geomesa:1.3.1
+docker run -it --rm --net=geomesa --entrypoint /scripts/follower.sh jamesmcclain/geomesa:1.3.2
 ```
 
 # Testing #
 
 As previously described, start the GeoMesa container like this:
 ```
-docker run -it --rm -p 50095:50095 --net=geomesa --hostname leader --name leader jamesmcclain/geomesa:1.3.1
+docker run -it --rm -p 50095:50095 --net=geomesa --hostname leader --name leader jamesmcclain/geomesa:1.3.2
 ```
 then I start a maven container to build/run the GeoMesa tutorial like this
 ```
@@ -39,7 +39,7 @@ cd src
 git clone https://github.com/geomesa/geomesa-tutorials.git
 cd geomesa-tutorials
 mvn clean install -pl geomesa-quickstart-accumulo
-java -cp geomesa-quickstart-accumulo/target/geomesa-quickstart-accumulo-1.3.1.0-SNAPSHOT.jar  com.example.geomesa.accumulo.AccumuloQuickStart -instanceId instance -zookeepers leader -user root -password password -tableName tutorial
+java -cp geomesa-quickstart-accumulo/target/geomesa-quickstart-accumulo-1.3.2.1-SNAPSHOT.jar  com.example.geomesa.accumulo.AccumuloQuickStart -instanceId instance -zookeepers leader -user root -password password -tableName tutorial
 ```
 which should produce output which looks something like this
 ```
